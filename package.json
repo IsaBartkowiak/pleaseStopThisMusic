@@ -3,7 +3,8 @@
     "version": "0.0.0",
     "scripts": {
         "deploy": "git push origin master && git push heroku master",
-        "postinstall": "ng build --aot --prod"
+        "postinstall": "ng build --aot --prod",
+        "test": "ng test --browsers PhantomJS --watch=false"
     },
     "private": true,
     "dependencies": {
