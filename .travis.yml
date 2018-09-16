@@ -4,10 +4,10 @@ node_js:
 cache:
   - node_modules
 before_script:
-  - ng test --single-run=true --browsers PhantomJS --watch=false
+  - ng test --browsers PhantomJS --watch=false
 deploy:
   api_key:
     secure: sDz2U6Z/q3Zvehf0n47WLVenoZvxkcOSSSTZ6QXeigz6TQxTB6fCavQJ9xODX3FrDtksER5lnvsR6Vm5/mBJG83JMYsFhpKzYvwD74hGTd5NczLcqvNfqug+dvgDEKH1HOv/PVFHtcforRm3knvbvllBwRwS8CUY/rzQC2OItWRnwoyVnvMFJJhyam9z9bqSgm13qdXWloeKWPuxKsVu+4AgYUiwA2kMZo00l8LI1t4zPKDEZp2mZoHfAy6FdNI/aek9GNngyaCUPBwPVmcigTHkU/VXXiUzJJa8n3YNSaMdX90+yEkQ8zmyu5UHm9r6G+/erf0xbws6vGlbU3avH9943oqjSa5KjO+aqnW3/1lz6Cg/WfyhMuLumG6CYEsOiQdMjmBz+uucXsu/UiThRo3NAWdEEoffV0H6QcLZuCIS9doF6e/yBMKupugCAlnaYNp0e862ZpMc2ja/SqHLTPtJS1h09a0S0AHxrAi1Tp9z/YgCcR0OM7AZCADUnaeOIlDReSFwzk11dqYO6o5aTXzP5BueTI8pIJ57VHbmBVs+75LaUIySyTf51yYL+IIbTv/HjdV+8xKW7d+LqWdb2rllFdoqMEDZL4s+TAuNlAmd0/v/V2obP56O/gzeH2nWiKm0vuOZIcj2dANalri58NH+KltA3z9uKkT8Xj1b9eQ=
   run:
-    - ng test --single-run=true --browsers PhantomJS --watch=false
+    - ng test --browsers PhantomJS --watch=false
   app: pleaseStopThisMusic
