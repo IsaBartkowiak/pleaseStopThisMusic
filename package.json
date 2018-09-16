@@ -6,7 +6,7 @@
         "postinstall": "ng build --aot --prod",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "test": "ng test --browsers PhantomJS --watch=false",
+        "test": "ng test --watch=false",
         "ci": "npm run lint && npm run test && npm run e2e"
     },
     "private": true,

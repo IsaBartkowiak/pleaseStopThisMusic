@@ -3,11 +3,11 @@ node_js:
   - "10"
 cache:
   - node_modules
+sudo: required
+addons:
+  chrome: stable
 notifications:
   email: false
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
 install:
   - npm install
 script:
