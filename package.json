@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "deploy" : "git push origin master && git push heroku master",
-    "postinstall": "ng build --aot -prod",
+    "postinstall": "ng build --aot --prod",
     "ng": "ng",
     "build": "ng build",
     "test": "ng test",
