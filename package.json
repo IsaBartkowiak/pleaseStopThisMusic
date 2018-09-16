@@ -4,7 +4,10 @@
     "scripts": {
         "deploy": "git push origin master && git push heroku master",
         "postinstall": "ng build --aot --prod",
-        "test": "ng test --browsers PhantomJS --watch=false"
+        "lint": "ng lint",
+        "e2e": "ng e2e",
+        "test": "ng test --browsers PhantomJS --watch=false",
+        "ci": "npm run lint && npm run test && npm run e2e"
     },
     "private": true,
     "dependencies": {
