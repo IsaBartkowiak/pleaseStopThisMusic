@@ -1,21 +1,19 @@
 language: node_js
 node_js:
-  - "10"
+- '10'
 cache:
-  - node_modules
+- node_modules
 sudo: required
 addons:
   chrome: stable
 notifications:
   email: false
 install:
-  - npm install
+- npm install
 script:
-  - npm run ci
+- npm run ci
 deploy:
   provider: heroku
   api_key:
-    secure: sDz2U6Z/q3Zvehf0n47WLVenoZvxkcOSSSTZ6QXeigz6TQxTB6fCavQJ9xODX3FrDtksER5lnvsR6Vm5/mBJG83JMYsFhpKzYvwD74hGTd5NczLcqvNfqug+dvgDEKH1HOv/PVFHtcforRm3knvbvllBwRwS8CUY/rzQC2OItWRnwoyVnvMFJJhyam9z9bqSgm13qdXWloeKWPuxKsVu+4AgYUiwA2kMZo00l8LI1t4zPKDEZp2mZoHfAy6FdNI/aek9GNngyaCUPBwPVmcigTHkU/VXXiUzJJa8n3YNSaMdX90+yEkQ8zmyu5UHm9r6G+/erf0xbws6vGlbU3avH9943oqjSa5KjO+aqnW3/1lz6Cg/WfyhMuLumG6CYEsOiQdMjmBz+uucXsu/UiThRo3NAWdEEoffV0H6QcLZuCIS9doF6e/yBMKupugCAlnaYNp0e862ZpMc2ja/SqHLTPtJS1h09a0S0AHxrAi1Tp9z/YgCcR0OM7AZCADUnaeOIlDReSFwzk11dqYO6o5aTXzP5BueTI8pIJ57VHbmBVs+75LaUIySyTf51yYL+IIbTv/HjdV+8xKW7d+LqWdb2rllFdoqMEDZL4s+TAuNlAmd0/v/V2obP56O/gzeH2nWiKm0vuOZIcj2dANalri58NH+KltA3z9uKkT8Xj1b9eQ=
-  run:
-    - ng test --browsers PhantomJS --watch=false
-  app: pleaseStopThisMusic
+    secure: UH7J85liblRTFgLEejdaO6OnE5qPOt+OhMd4feZBY0xyJJeFjkcEY4p3Yqyxkuea83nCb5rDNjS0nVBOl7bIsgL7oC8MwKWvocY5QiJ/h/DAzhMYuBrOYH9GqJYk2RY/accoNUC6AcGPLhe8BC2jUZPLfarkT9wnNSoz2ta1bD1YJkUGuqJ55jE5p0Zt9QHIl5FKWQf8TUpylekQ5uHC1mjhRL3evPvMj2liIYCqgjX2xUUS0CCXbacYcdWBKFpS0f9sl8/+bSekKAiDezK03Lvm33ql7O91Su31DdCHj52HPrEYAtDbZW5LfXgvCCcf4LOJCyrvo+saCq92qWRKprwNRqrPTogXFX7Z5Nd/VuWzs0AEFLkLCre5UIjS3mUm2E8YkJjUchE8YQMKNnLN2vzm73p4sXg4jS5r+XYvnZmvIEE4df2Is4NWjvXsWWiG+kDFywpn85H7y2F+1iB9BMnEtJbTdwvXHB5vxrF0JoPiWQ/uM5LnQj4ZROtswqjuDaXkzZAVYiyPq8OLvzEgsHRm6k60vzPP+l2sOaXgvb9/rd4m0dyi6IUfwaYtXkvRIz9Z+KAjUYG2fC7tngjAAuDVSpch/Nmw2hokAIibdPCbMm2TfujbBTohIYIjupjQRyy+VODZlP+w42PfAXgy5PHeOHslEZLmR8HuytgMnlE=
+  app: pstm
