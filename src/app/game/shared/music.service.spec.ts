@@ -27,21 +27,16 @@ describe('MusicService', () => {
 		expect(service).toBeTruthy();
 	});
 	
-	it('should have musics setted', () => {
+	it('should have getMusics() working function', () => {
 		const service: MusicService = TestBed.get(MusicService);
-		expect(service.MUSICS).toBeTruthy();
-	});
-	
-	it('should have getMusics() function', () => {
-		const service: MusicService = TestBed.get(MusicService);
-		service.MUSICS = MUSICS;
+		service.setMusics(MUSICS);
 		service.getMusics().subscribe((music) => {
 			expect(music.length).toBe(2);
 			expect(music[0].name).toEqual('test1');
 			expect(music[0].file).toEqual('test');
 		});
 	});
-	it('should have getCurrentMusic() function', () => {
+	it('should have getCurrentMusic() working function', () => {
 		const service: MusicService = TestBed.get(MusicService);
 		expect(service.getCurrentMusic() instanceof BehaviorSubject).toBeTruthy();
 		service.getCurrentMusic().subscribe((music) => {
@@ -50,9 +45,10 @@ describe('MusicService', () => {
 			expect(music.image).toEqual('test');
 		});
 	});
-	it('should have getTotalCount function', () => {
+	
+	it('should have getTotalCount working function', () => {
 		const service: MusicService = TestBed.get(MusicService);
-		service.MUSICS = MUSICS;
+		service.setMusics(MUSICS);
 		expect(service.getTotalCount()).toEqual(2);
 	});
 });
