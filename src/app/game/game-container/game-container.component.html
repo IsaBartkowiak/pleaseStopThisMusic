@@ -1,0 +1,10 @@
+<div class="game-container" (click)="checkResult($event)">
+<img class="game-logo" src="assets/images/logo.png" alt="">
+	<div class="game-answer" id="answer" [ngStyle]="randomPosition" [ngClass]="{'win': winner}">
+		<img class="game-answer-image" src="assets/images/twerk.gif" alt="">
+		<button class="game-answer-next" *ngIf="win && !end" (click)="nextMusic()">Next</button>
+	</div>
+	<div class="game-click" *ngIf="showCircle" [ngStyle]="{'left': clickX - 5+'px', 'top': clickY - 5+'px'}"></div>
+	<pstm-music-player [try]="try" [win]="win"></pstm-music-player>
+</div>
+
