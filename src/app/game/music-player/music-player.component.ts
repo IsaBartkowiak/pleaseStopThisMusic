@@ -51,21 +51,16 @@ export class MusicPlayerComponent implements OnInit {
 	
 	getRelativeVolumetoDistance(distance){
 		if((1 - (distance / 1000)) > 1){
-			console.log(1);
 			return 1;
 		}
 		if((1 - (distance / 1000) < 0)){
-			console.log(0.1);
 			return 0.1;
 		}
-		console.log(Math.round( (1 - (distance / 1000)) * 10) / 10);
 		return Math.round( (1 - (distance / 1000)) * 10) / 10;
 	}
 	
 	ngOnDestroy() {
-		// this.try.unsubscribe();
 		 this.subscription.unsubscribe();
-		//this.MusicService.getCurrentMusic().unsubscribe();
 	}
 
 
