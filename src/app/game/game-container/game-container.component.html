@@ -1,6 +1,6 @@
 <div class="game-container" (click)="checkResult($event)">
 <img class="game-logo" src="assets/images/logo.png" alt="">
-	<div class="game-answer win" id="answer" [ngStyle]="randomPosition" [ngClass]="{'win': winner}">
+	<div class="game-answer win" id="answer" [ngStyle]="randomPosition" [ngClass]="{'win': finded}">
 		<img class="game-answer-image" src="assets/images/twerk.gif" alt="">
 		<button class="game-answer-next" *ngIf="win && !end" (click)="nextMusic()">Next</button>
 	</div>

@@ -12,12 +12,13 @@ export class GameContainerComponent implements OnInit {
 	music : any;
 	try : Subject<any> = new Subject();
 	win : Subject<any> = new Subject();
-	winner : boolean = false;
+	finded : boolean = false;
 	end : boolean = false;
 	clickX : number;
 	clickY: number;
 	showCircle: boolean = false;
-	randomPosition: any;	
+	randomPosition: any;
+	totalMusic: number;	
 
 	constructor(private MusicService: MusicService) { }
 
@@ -26,6 +27,7 @@ export class GameContainerComponent implements OnInit {
 		this.MusicService.getCurrentMusic().subscribe(music => {
 			this.music = music;
 		});
+		this.totalMusic = this.MusicService.getTotalCount();
 	}
 	
 	setRandomPosition(){
@@ -36,7 +38,7 @@ export class GameContainerComponent implements OnInit {
 	}
 	
 	nextMusic(){
-		this.winner = false;
+		this.finded = false;
 		this.setRandomPosition();
 		if(!this.MusicService.nextMusic()){
 			this.end = true;
@@ -54,7 +56,7 @@ export class GameContainerComponent implements OnInit {
 		const distance = this.calculateDistance(event.clientX, event.clientY);
 		this.notifyTry(distance);
 		if(distance === 0){
-			this.winner = true;
+			this.finded = true;
 			this.notifyWin(true);
 		}
 	}
