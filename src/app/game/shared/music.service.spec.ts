@@ -2,34 +2,34 @@ import { TestBed } from '@angular/core/testing';
 import { MusicService } from './music.service';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 
-export const MUSICS: any[] = [
-  { 
-    id: 1, 
-    name: 'test1',
-    file: 'test',
-    image: 'test'
-  },
-  { 
-    id: 2, 
-    name: 'test2',
-    file: 'test',
-    image: 'test'
-  }
+export const TESTMUSICS: any[] = [
+{ 
+	id: 1, 
+	name: 'test1',
+	file: 'test',
+	image: 'test'
+},
+{ 
+	id: 2, 
+	name: 'test2',
+	file: 'test',
+	image: 'test'
+}
 ];
 
 describe('MusicService', () => {
-	beforeEach(() => 
-		TestBed.configureTestingModule({})
-		);
+	
+	beforeEach(() => {
+		TestBed.configureTestingModule({ providers: [MusicService, {provide: 'testdata', useValue: TESTMUSICS}] });
+	});
 
 	it('should be created', () => {
-		let service: MusicService = TestBed.get(MusicService);
+		let service = TestBed.get(MusicService);
 		expect(service).toBeTruthy();
 	});
 	
 	it('should have getMusics() working function', () => {
-		const service: MusicService = TestBed.get(MusicService);
-		service.setMusics(MUSICS);
+		let service = TestBed.get(MusicService);
 		service.getMusics().subscribe((music) => {
 			expect(music.length).toBe(2);
 			expect(music[0].name).toEqual('test1');
@@ -37,7 +37,7 @@ describe('MusicService', () => {
 		});
 	});
 	it('should have getCurrentMusic() working function', () => {
-		const service: MusicService = TestBed.get(MusicService);
+		let service = TestBed.get(MusicService);
 		expect(service.getCurrentMusic() instanceof BehaviorSubject).toBeTruthy();
 		service.getCurrentMusic().subscribe((music) => {
 			expect(music.name).toEqual('test1');
@@ -47,8 +47,7 @@ describe('MusicService', () => {
 	});
 	
 	it('should have getTotalCount working function', () => {
-		const service: MusicService = TestBed.get(MusicService);
-		service.setMusics(MUSICS);
+		let service = TestBed.get(MusicService);
 		expect(service.getTotalCount()).toEqual(2);
 	});
 });
