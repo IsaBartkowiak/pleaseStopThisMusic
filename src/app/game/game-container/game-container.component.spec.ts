@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, Subject} from 'rxjs';
 import { GameContainerComponent } from './game-container.component';
 import { MusicPlayerComponent } from '../music-player/music-player.component';
+import { By }              from '@angular/platform-browser';
+import { DebugElement }    from '@angular/core';
 
 describe('GameContainerComponent', () => {
   let component: GameContainerComponent;
@@ -10,7 +12,7 @@ describe('GameContainerComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ GameContainerComponent, MusicPlayerComponent ]
-          })
+    })
     .compileComponents();
   }));
 
@@ -30,36 +32,59 @@ describe('GameContainerComponent', () => {
     expect(component.music.name).toBe("Khaled - Aïcha", "Music name is set");
     expect(component.win instanceof Subject).toBeTruthy("win is set");
     expect(component.try instanceof Subject).toBeTruthy("try is set");
+    expect(component.totalMusic).toBeTruthy();
   });
   
-  it('should random position answer', () => {
-    component.ngOnInit();
-    let top1 = parseInt(component.randomPosition.top.slice(0, -1));
-    component.ngOnInit();
-    let top2 = parseInt(component.randomPosition.top.slice(0, -1));
-    console.log(top2);
-    expect(top1 >= 0 && top1 <= 85).toBeTruthy('Position between 0 to 85%');
-    expect(top1 != top2).toBeTruthy('Position is random');
+  it('should have answer div on page', () => {
+    let ansDiv = fixture.debugElement.query(By.css("#answer"));
+    expect(ansDiv).toBeTruthy();
+  });
+  
+  it('should random position answer between right values', () => {
+    let top = parseInt(component.randomPosition.top.slice(0, -1));
+    let left = parseInt(component.randomPosition.left.slice(0, -1));
+    let ansDiv = <HTMLElement> document.getElementById("answer");
+    expect(top >= 0 && top <= (window.innerHeight - ansDiv.clientHeight)).toBeTruthy();
+    expect(left >= 0 && left <= (window.innerWidth - ansDiv.clientWidth)).toBeTruthy();
   });
   
   it('calculateDistance() should return the right distance', () => {
-    component.ngOnInit();
     component.randomPosition = {
       'top': "100px", 
       'left' : "100px"
     }
+    let ansDiv = <HTMLElement> document.getElementById("answer");
+    ansDiv.style.width = "0px";
+    ansDiv.style.height = "0px";
+    ansDiv.style.lineHeight = "0px";
     fixture.detectChanges();
+    
     let distance = component.calculateDistance(0,0);
-    expect(distance).toBe(199, 'Calculate right distance click');
+    expect(distance).toBe(141, 'Calculate right distance click'); //diagonale
   });
-  it('calculateDistance() should return 0 if answer is clicked', () => {
+  
+  it('should show answer div when clicked on the right place', () => {
     component.ngOnInit();
     component.randomPosition = {
-      'top': "0%", 
-      'left' : "0%"
+      'top': "0px", 
+      'left' : "0px"
     }
     fixture.detectChanges();
+    let container = <HTMLElement> document.querySelector(".game-container");
+    container.click();
     let distance = component.calculateDistance(1,1);
     expect(distance).toBe(0, 'Return 0 if answer is clicked');
+    expect(component.finded).toBe(true);
   });
+  
+  it('should can pass to the next music', () => {
+    let tmpMusicName = component.music.name;
+    let tmpTopPosition = component.randomPosition.top;
+    component.nextMusic();
+    fixture.detectChanges();
+    expect(component.music).toBeTruthy();
+    expect(tmpMusicName != component.music.name).toBeTruthy();
+    expect(tmpTopPosition != component.randomPosition.top).toBeTruthy();
+  });
+
 });
