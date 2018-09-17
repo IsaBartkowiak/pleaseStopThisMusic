@@ -5,29 +5,30 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class IndicationPipe implements PipeTransform {
 
-  transform(distance: number): any {
-		if(!distance) return;
+  transform(distance: number, format:string = "human"): any {
+		if (!distance) return;
+		if  (format != "human" && format != "class") return;
 		
-		if(distance < 30){
-			return "Burning";
+		if (distance < 30) {
+			return format === "human" ? "Burning" : "burning";
 		}
-		if(distance < 100){
-			return "Very hot";
+		if (distance < 100) {
+			return format === "human" ? "Very hot" : "very-hot";
 		}
-		if(distance < 200){
-			return "Hot";
+		if (distance < 200) {
+			return format === "human" ? "Hot" : "hot";
 		}
-		if(distance < 300){
-			return "Tepid";
+		if (distance < 300) {
+			return format === "human" ? "Tepid" : "tepid";
 		}
-		if(distance < 400){
-			return "Cold";
+		if (distance < 400) {
+			return format === "human" ? "Cold" : "cold";
 		}
-		if(distance < 500){
-			return "Very cold";
+		if (distance < 500) {
+			return format === "human" ? "Very cold" : "very-cold";
 		}
-		if(distance < 600){
-			return "Glacial";
+		if (distance < 600) {
+			return format === "human" ? "Glacial" : "glacial";
 		}
 	}
 

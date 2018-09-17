@@ -21,9 +21,20 @@ describe('IndicationPipe', () => {
     expect(pipe.transform(550)).toBe("Glacial");
 });
   
-    it('should return TEPID if distance is > 200', () => {
+  it('should return TEPID if distance is > 200', () => {
     const pipe = new IndicationPipe();
     expect(pipe.transform(250)).toBe("Tepid");
+});
+  
+  it('should stop if wrong format', () => {
+    const pipe = new IndicationPipe();
+    expect(pipe.transform(250, 'test')).toBeFalsy();
+});
+  
+  it('should return good format', () => {
+    const pipe = new IndicationPipe();
+    expect(pipe.transform(250, 'human')).toBe("Tepid");
+    expect(pipe.transform(250, 'class')).toBe("tepid");
 });
   
 });
