@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, Subject} from 'rxjs';
 import { GameContainerComponent } from './game-container.component';
+import { MusicPlayerComponent } from '../music-player/music-player.component';
 
 describe('GameContainerComponent', () => {
   let component: GameContainerComponent;
@@ -8,8 +9,8 @@ describe('GameContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GameContainerComponent ]
-    })
+      declarations: [ GameContainerComponent, MusicPlayerComponent ]
+          })
     .compileComponents();
   }));
 
@@ -25,8 +26,8 @@ describe('GameContainerComponent', () => {
   
   it('should have all properties', () => {
     expect(typeof component.randomPosition == "object").toBeTruthy("randomPosition is set");
-    expect(component.musics[0]).toBeTruthy("musics is set");
-    expect(typeof component.currentMusic.name == "string").toBeTruthy("currentMusic is set");
+    expect(component.music).toBeTruthy("musics is set");
+    expect(component.music.name).toBe("Khaled - Aïcha", "Music name is set");
     expect(component.win instanceof Subject).toBeTruthy("win is set");
     expect(component.try instanceof Subject).toBeTruthy("try is set");
   });
@@ -36,6 +37,7 @@ describe('GameContainerComponent', () => {
     let top1 = parseInt(component.randomPosition.top.slice(0, -1));
     component.ngOnInit();
     let top2 = parseInt(component.randomPosition.top.slice(0, -1));
+    console.log(top2);
     expect(top1 >= 0 && top1 <= 85).toBeTruthy('Position between 0 to 85%');
     expect(top1 != top2).toBeTruthy('Position is random');
   });

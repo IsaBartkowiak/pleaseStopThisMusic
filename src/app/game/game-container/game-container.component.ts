@@ -17,15 +17,13 @@ export class GameContainerComponent implements OnInit {
 	clickX : number;
 	clickY: number;
 	showCircle: boolean = false;
-	randomPosition: any;
-	subscription;
-	
+	randomPosition: any;	
 
 	constructor(private MusicService: MusicService) { }
 
 	ngOnInit() {
 		this.setRandomPosition();
-		this.subscription = this.MusicService.getCurrentMusic().subscribe(music => {
+		this.MusicService.getCurrentMusic().subscribe(music => {
 			this.music = music;
 		});
 	}
@@ -81,7 +79,7 @@ export class GameContainerComponent implements OnInit {
 	}
 	
 	ngOnDestroy(){
-		this.subscription.unsubscribe();
+		this.MusicService.getCurrentMusic().unsubscribe();
 	}
 
 }
