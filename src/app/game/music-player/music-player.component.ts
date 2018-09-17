@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Subject} from 'rxjs';
+import { Subject, Subscription} from 'rxjs';
 import { MusicService } from './../shared/music.service';
 
 @Component({
@@ -12,32 +12,35 @@ export class MusicPlayerComponent implements OnInit {
 	@Input() win : Subject<any>;
 	music: any;
 	audio: any;
-	musicSubscription;
-	trySubscription;
-	winSubscription;
+	subscription: Subscription = new Subscription();
 	
 	constructor(private MusicService: MusicService) { }
 
-	ngOnInit() {
-		this.trySubscription = this.try.subscribe(distance => {
+	ngOnInit() {	
+		const sub1 = this.try.subscribe(distance => {
 			if(this.audio){
 				this.audio.volume = this.getRelativeVolumetoDistance(distance);
 			}
 		});
-		this.winSubscription = this.win.subscribe(status => {
+		this.subscription.add(sub1);
+		
+		const sub2 = this.win.subscribe(status => {
 			if(status){
 				this.audio.pause();
 			}
 		});
-		this.musicSubscription = this.MusicService.getCurrentMusic().subscribe(music => {
+		this.subscription.add(sub2);
+
+		const sub3 = this.MusicService.getCurrentMusic().subscribe(music => {
 			if(this.audio){
 				this.audio.pause();
 				this.audio.load();
 				let that = this;
-				setTimeout(function() {that.audio.play()}, 0);
+				setTimeout(function() {that.audio.play();}, 0);
 			}
 			this.music = music;
 		});
+		this.subscription.add(sub3);
 	}
 	
 	ngAfterViewInit() {
@@ -60,9 +63,9 @@ export class MusicPlayerComponent implements OnInit {
 	}
 	
 	ngOnDestroy() {
-		// this.winSubscription.unsubscribe();
-		// this.trySubscription.unsubscribe();
-		// this.musicSubscription.unsubscribe();
+		// this.try.unsubscribe();
+		 this.subscription.unsubscribe();
+		//this.MusicService.getCurrentMusic().unsubscribe();
 	}
 
 
