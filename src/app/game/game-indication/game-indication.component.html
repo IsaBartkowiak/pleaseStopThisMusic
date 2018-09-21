@@ -2,16 +2,18 @@
     <div class="game-indication-text"
     [ngClass]="[distance | indication: 'class' : showIndicator]"
     [ngSwitch]="showIndicator">
-        <span *ngSwitchCase="true">{{distance | indication}}</span>
+        <span *ngSwitchCase="true">
+        {{distance | indication}}
+        </span>
         <span *ngSwitchCase="false">Yeaaah ! </span>
     </div>
     <div class="game-indication-score">
         {{score}} / {{totalMusic}}
     </div>
     <div class="game-indication-music">
-        {{music.name}}
+        <i class="icon-headphones"></i>{{music.name}}
     </div>
-    <div class="game-indication-message" *ngIf="showMessage">
+    <div class="game-indication-message" *ngIf="showMessage" (click)="showMessage = !showMessage">
         <p>Something is hidden on the page. Click somewhere on the page to find it and stop this music</p>
     </div>
 </div>

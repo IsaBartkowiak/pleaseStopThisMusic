@@ -32,7 +32,6 @@ describe('GameIndicationComponent', () => {
     it('should have all properties', () => {
         expect(component.win instanceof Subject).toBeTruthy('win is set');
         expect(component.clickContainer instanceof Subject).toBeTruthy('try is set');
-        expect(component.subscription instanceof Subscription).toBeTruthy('subscription is set');
         expect(component.distance).toBeFalsy('distance is set');
         expect(component.score).toEqual(0, 'Score is set');
         expect(component.music).toBeTruthy();
