@@ -5,7 +5,6 @@ import { MusicService } from './../shared/music.service';
 @Component({
     selector: 'pstm-music-player',
     templateUrl: './music-player.component.html',
-    styleUrls: ['./music-player.component.scss']
 })
 export class MusicPlayerComponent implements OnInit, OnDestroy {
     @Input() clickContainer: Subject<any>;
@@ -25,7 +24,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
         this.subscription.add(sub1);
         const sub2 = this.win.subscribe(status => {
             if (status) {
-                this.audio.pause();
+                this.audio.volume = 0.1;
             }
         });
         this.subscription.add(sub2);
@@ -34,13 +33,26 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
             if (this.audio) {
                 this.audio.pause();
             }
-            this.audio = new Audio('assets/audio/'+music.file);
-            this.audio.load();
-            this.audio.play();
-            this.audio.volume = 0.4;
             this.music = music;
+            this.infinitePlay(music.file);
         });
         this.subscription.add(sub3);
+    }
+
+    infinitePlay(file){
+        this.audio = new Audio('assets/audio/'+file);
+        this.playAudio();
+        var that = this;
+        this.audio.addEventListener('ended', function() {
+            this.currentTime = 0;
+            that.playAudio();
+        }, false);
+    }
+
+    playAudio(){
+        this.audio.load();
+        this.audio.play();
+        this.audio.volume = 0.4;
     }
 
     getRelativeVolumetoDistance(distance) {
