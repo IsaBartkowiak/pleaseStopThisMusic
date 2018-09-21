@@ -29,8 +29,8 @@ export class GameContainerComponent implements OnInit, OnDestroy {
     setRandomPosition() {
         const ansDiv = <HTMLElement> document.getElementById('answer');
         this.randomPosition = {
-            'top': Math.floor(Math.random() * (window.innerHeight - ansDiv.clientHeight)) + 'px',
-            'left' : Math.floor(Math.random() * (window.innerWidth - ansDiv.clientWidth)) + 'px'
+            'top': Math.floor(Math.random() * (window.innerHeight - ansDiv.clientHeight - 50)) + 'px',
+            'left' : Math.floor(Math.random() * (window.innerWidth - ansDiv.clientWidth - 50)) + 'px'
         };
     }
 
