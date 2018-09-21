@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, Subject} from 'rxjs';
 import { MusicService } from './../shared/music.service';
+import { GameIndicationComponent } from '../game-indication/game-indication.component';
 
 @Component({
     selector: 'pstm-game-container',
@@ -9,8 +10,8 @@ import { MusicService } from './../shared/music.service';
 })
 export class GameContainerComponent implements OnInit, OnDestroy {
 
-    music: any;
-    try: Subject<any> = new Subject();
+    @ViewChild(GameIndicationComponent) indication: GameIndicationComponent;
+    clickContainer: Subject<any> = new Subject();
     win: Subject<any> = new Subject();
     finded = false;
     end = false;
@@ -18,31 +19,26 @@ export class GameContainerComponent implements OnInit, OnDestroy {
     clickY: number;
     showCircle = false;
     randomPosition: any;
-    totalMusic: number;
 
     constructor (private musicService: MusicService) { }
 
     ngOnInit() {
         this.setRandomPosition();
-        this.musicService.getCurrentMusic().subscribe(music => {
-            this.music = music;
-        });
-        this.motalMusic = this.MusicService.getTotalCount();
     }
 
     setRandomPosition() {
+        const ansDiv = <HTMLElement> document.getElementById('answer');
         this.randomPosition = {
-            'top': Math.floor(Math.random() * 86) + '%',
-            'left' : Math.floor(Math.random() * 86) + '%'
+            'top': Math.floor(Math.random() * (window.innerHeight - ansDiv.clientHeight)) + 'px',
+            'left' : Math.floor(Math.random() * (window.innerWidth - ansDiv.clientWidth)) + 'px'
         };
     }
 
-    nextMusic() {
+    nextMusic(event) {
+        event.stopPropagation();
         this.finded = false;
         this.setRandomPosition();
-        if (!tmis.MusicService.nextMusic()) {
-            this.end = true;
-        }
+        this.musicService.nextMusic();
     }
 
     checkResult(event) {
@@ -61,31 +57,39 @@ export class GameContainerComponent implements OnInit, OnDestroy {
         }
     }
 
+    restartGame(){
+        event.stopPropagation();
+        this.indication.score = 0;
+        this.finded = false;
+        this.setRandomPosition();
+        this.musicService.resetMusics();
+    }
+
     calculateDistance(clickX, clickY) {
         const answer = document.getElementById('answer');
         if (
             clickX >= answer.offsetLeft &&
-            clickX <= (answer.offsetLeft + answer.offsetWidth) &&
+            clickX <= (answer.offsetLeft + answer.offsetWidth - 50) &&
             clickY >= answer.offsetTop &&
-            clickY <= (answer.offsetTop + answer.offsetHeight)) {
+            clickY <= (answer.offsetTop + answer.offsetHeight - 50)) {
             return 0;
-        }
-        return Math.floor(Math.sqrt(Math.pow(
+    }
+    return Math.floor(Math.sqrt(Math.pow(
             clickX - (answer.offsetLeft + (answer.offsetWidth / 2)), 2) +
             Math.pow(clickY - (answer.offsetTop + (answer.offsetHeight / 2)), 2
         )));
-    }
+}
 
-    notifyTry(distance) {
-      this.try.next(distance);
-  }
+notifyTry(distance) {
+    this.clickContainer.next(distance);
+}
 
-  notifyWin(status) {
-      this.win.next(status);
-  }
+notifyWin(status) {
+    this.win.next(status);
+}
 
-  ngOnDestroy() {
-      this.musicService.getCurrentMusic().unsubscribe();
-  }
+ngOnDestroy() {
+    this.musicService.getCurrentMusic().unsubscribe();
+}
 
 }
