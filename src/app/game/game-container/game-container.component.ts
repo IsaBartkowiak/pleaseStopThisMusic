@@ -78,6 +78,7 @@ export class GameContainerComponent implements OnInit, OnDestroy {
         }
         if(this.indication.score === this.indication.totalMusic){
             this.endOfGame = true;
+            this._timerSubscription.unsubscribe();
         }
     }
 
@@ -85,6 +86,7 @@ export class GameContainerComponent implements OnInit, OnDestroy {
         event.stopPropagation();
         this.indication.score = 0;
         this.finded = false;
+        this.endOfGame = false;
         this.setRandomPosition();
         this.musicService.resetMusics();
         this.restartTimer();
