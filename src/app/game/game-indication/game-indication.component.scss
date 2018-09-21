@@ -1,3 +1,6 @@
+@import './src/assets/styles/_icons';
+@import './src/assets/styles/_variables';
+
 :host {
     position: absolute;
     bottom: 10px;
@@ -7,7 +10,6 @@
 }
 .game-indication{
     &-text{
-        font-family: 'Josefin Sans', sans-serif;
         font-weight: 600;
         color: white;
         position: absolute;
@@ -20,71 +22,101 @@
         transition: all .2s ease;
         text-transform: uppercase;
         bottom: 0;
+        &:before, &:after{
+            content:"";
+        }
         &.burning{
-            color:#dc1010;
-        }
-        &.very-hot{
-            color:#e00a57;
-        }
-        &.hot{
-            color:#e00aad;
-        }
-        &.tepid{
-            color:#ac0ae0;
-        }
-        &.cold{
-            color:#690ae0;
-        }
-        &.very-cold{
-            color:#0abce0;
-        }
-        &.glacial{
-            color:#0ae0cb;
+            color:$burning;
+            &:before, &:after{
+             @include icon($icon-fire);
+         }
+     }
+     &.very-hot{
+        color:$very-hot;
+        &:before, &:after{
+            @include icon($icon-fire);
         }
     }
-    &-music{
-        position: absolute;
-        color: white;
-        font-family: 'Josefin Sans', sans-serif;
-        font-weight: 300;
-        right: 10px;
-        font-size: 0.8rem;
-        bottom: 0;
+    &.hot{
+        color:$hot;
+        &:before, &:after{
+            @include icon($icon-fire);
+        }
     }
-    &-score{
-        position: absolute;
-        color: white;
-        font-family: 'Josefin Sans', sans-serif;
-        font-weight: 400;
-        left: 10px;
-        bottom: 0;
+    &.tepid{
+        color:$tepid;
+        &:before, &:after{
+            @include icon($icon-thermometer-half);
+        }
     }
-    &-message{
-        color: white;
-        font-family: 'Josefin Sans', sans-serif;
-        background-color: black;
-        max-width: 300px;
-        z-index: 3;
-        font-weight: 300;
-        padding: 10px 15px;
+    &.cold{
+        color:$cold;
+        &:before, &:after{
+            @include icon($icon-snowflake);
+        }
+    }
+    &.very-cold{
+        color:$very-cold;
+        &:before, &:after{
+            @include icon($icon-snowflake);
+        }
+    }
+    &.glacial{
+        color:$glacial;
+        &:before, &:after{
+            @include icon($icon-snowflake);
+        }
+    }
+}
+&-music{
+    position: absolute;
+    color: white;
+    font-weight: 300;
+    right: 10px;
+    font-size: 0.8rem;
+    bottom: 0;
+    i{
+        margin-right: 5px;
+    }
+    @media (max-width: 768px) {
+        text-align:center;
+        bottom: 25px;
+        left: 0;
+        right: 0;
+    }
+}
+&-score{
+    position: absolute;
+    color: white;
+    font-weight: 400;
+    left: 10px;
+    bottom: 0;
+}
+&-message{
+    color: white;
+    background-color: black;
+    max-width: 300px;
+    z-index: 3;
+    font-weight: 300;
+    padding: 10px 15px;
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    &:before {
+        content: "";
         position: absolute;
-        bottom: 50px;
         left: 0;
         right: 0;
         margin: auto;
-        text-align: center;
-        &:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            margin: auto;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid #000;
-            bottom: -10px;
-        }
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #000;
+        bottom: -10px;
     }
+}
 }

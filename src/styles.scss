@@ -3,3 +3,10 @@
 @import "./assets/styles/icons.scss";
 @import "./assets/styles/fonts.scss";
 @import "./assets/styles/mixins.scss";
+
+body{
+    background-color: #171717;
+    *{
+       font-family: "Josefin Sans", sans-serif;
+    }
+}

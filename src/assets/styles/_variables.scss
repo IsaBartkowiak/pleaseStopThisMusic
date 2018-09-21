@@ -1,6 +1,14 @@
 $grey: #f8f9f3;
 $light-grey: #929292;
 $border-grey: #f3f3f3;
+$burning:#dc1010;
+$very-hot:#e00a57;
+$hot:#e00aad;
+$tepid:#ac0ae0;
+$very-cold:#690ae0;
+$cold:#0abce0;
+$glacial:#0ae0cb;
+$bg:#171717;
 
 
 // easing (so funny)
@@ -41,5 +49,5 @@ $easeInOutFast: cubic-bezier(1,0,0,1);
 $authenticMotion: cubic-bezier(.4,0,.2,1);
 
 @mixin box-shadow(){
-	box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.1);
+ box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.1);
 }
