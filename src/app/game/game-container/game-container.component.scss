@@ -76,7 +76,6 @@
         left: 0;
         right: 0;
         top: 30%;
-        font-family: "Josefin Sans", sans-serif;
         &-btn{
             display: inline-block;
             padding: 12px 20px;
@@ -94,6 +93,13 @@
             cursor:pointer;
         }
     }
+    &-timer{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color:white;
+        font-size: 0.6rem;
+    }
     &-next{
       position: absolute;
       bottom: 50px;
@@ -109,7 +115,6 @@
       background-color: black;
       text-transform: uppercase;
       text-align: center;
-      font-family: "Josefin Sans", sans-serif;
       font-weight: 400;
       font-size: 0.7rem;
   }

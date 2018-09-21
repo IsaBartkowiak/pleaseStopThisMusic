@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, Subject} from 'rxjs';
 import { GameContainerComponent } from './game-container.component';
 import { MusicPlayerComponent } from '../music-player/music-player.component';
+import { TimerService } from '../shared/timer.service';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { GameIndicationComponent } from '../game-indication/game-indication.component';
@@ -13,7 +14,8 @@ describe('GameContainerComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ GameContainerComponent, MusicPlayerComponent, GameIndicationComponent, IndicationPipe]
+            declarations: [ GameContainerComponent, MusicPlayerComponent, GameIndicationComponent, IndicationPipe],
+            providers: [ TimerService ]
         })
         .compileComponents();
     }));

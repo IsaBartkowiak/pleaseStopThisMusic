@@ -14,10 +14,15 @@
     <pstm-music-player [clickContainer]="clickContainer" [win]="win"></pstm-music-player>
     <pstm-game-indication [clickContainer]="clickContainer" [win]="win"></pstm-game-indication>
 
+    <div class="game-timer">
+        {{time}}
+    </div>
+
     <div class="game-end" *ngIf="indication.score === indication.totalMusic">
-        <h2 class="game-end-text">Thank you for stopping all these music</h2>
+        <h2 class="game-end-text">Thank you for stopping all these music in {{time}}s</h2>
         <p>Maybe you want to</p>
         <div class="game-end-btn" (click)="restartGame($event)">restart</div>
     </div>
 
 </div>
+

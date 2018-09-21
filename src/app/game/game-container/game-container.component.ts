@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Observable, Subject} from 'rxjs';
+import { Observable, Subject, Subscription} from 'rxjs';
 import { MusicService } from './../shared/music.service';
+import { TimerService } from './../shared/timer.service';
 import { GameIndicationComponent } from '../game-indication/game-indication.component';
 
 @Component({
@@ -11,6 +12,7 @@ import { GameIndicationComponent } from '../game-indication/game-indication.comp
 export class GameContainerComponent implements OnInit, OnDestroy {
 
     @ViewChild(GameIndicationComponent) indication: GameIndicationComponent;
+    private _timerSubscription: Subscription;
     clickContainer: Subject<any> = new Subject();
     win: Subject<any> = new Subject();
     finded = false;
@@ -19,11 +21,13 @@ export class GameContainerComponent implements OnInit, OnDestroy {
     clickY: number;
     showCircle = false;
     randomPosition: any;
+    time;
 
-    constructor (private musicService: MusicService) { }
+    constructor (private musicService: MusicService, private timerService: TimerService) {}
 
     ngOnInit() {
         this.setRandomPosition();
+        this.listenTimer();
     }
 
     setRandomPosition() {
@@ -32,6 +36,18 @@ export class GameContainerComponent implements OnInit, OnDestroy {
             'top': Math.floor(Math.random() * (window.innerHeight - ansDiv.clientHeight - 50)) + 'px',
             'left' : Math.floor(Math.random() * (window.innerWidth - ansDiv.clientWidth - 50)) + 'px'
         };
+    }
+
+    listenTimer(){
+        this._timerSubscription = this.timerService.getTimer().subscribe(
+            time => {
+                this.time = time;
+            });
+    }
+
+    restartTimer(){
+        this._timerSubscription.unsubscribe();
+        this.listenTimer();
     }
 
     nextMusic(event) {
@@ -63,6 +79,7 @@ export class GameContainerComponent implements OnInit, OnDestroy {
         this.finded = false;
         this.setRandomPosition();
         this.musicService.resetMusics();
+        this.restartTimer();
     }
 
     calculateDistance(clickX, clickY) {
@@ -75,8 +92,8 @@ export class GameContainerComponent implements OnInit, OnDestroy {
             return 0;
     }
     return Math.floor(Math.sqrt(Math.pow(
-            clickX - (answer.offsetLeft + (answer.offsetWidth / 2)), 2) +
-            Math.pow(clickY - (answer.offsetTop + (answer.offsetHeight / 2)), 2
+        clickX - (answer.offsetLeft + (answer.offsetWidth / 2)), 2) +
+    Math.pow(clickY - (answer.offsetTop + (answer.offsetHeight / 2)), 2
         )));
 }
 
@@ -90,6 +107,7 @@ notifyWin(status) {
 
 ngOnDestroy() {
     this.musicService.getCurrentMusic().unsubscribe();
+    this._timerSubscription.unsubscribe();
 }
 
 }
