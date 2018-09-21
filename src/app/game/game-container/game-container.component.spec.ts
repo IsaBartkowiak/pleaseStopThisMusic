@@ -65,18 +65,18 @@ describe('GameContainerComponent', () => {
         expect(distance).toBe(141, 'Calculate right distance click'); // diagonale
     });
 
-    it('should show answer div when clicked on the right place', () => {
-        component.ngOnInit();
-        component.randomPosition = {
-            'top': '0px',
-            'left' : '0px'
-        };
-        fixture.detectChanges();
-        const container = <HTMLElement> document.querySelector('.game-container');
-        container.click();
+    it('should show answer div when answer is finded', () => {
+        simulateWin(component);
         const distance = component.calculateDistance(1, 1);
-        expect(distance).toBe(0, 'Return 0 if answer is clicked');
+        fixture.detectChanges();
+        expect(distance).toBe(0);
         expect(component.finded).toBe(true);
+    });
+
+    it('should increment score when answer is finded', () => {
+        const tmpScore = component.indication.score;
+        const distance = simulateWin(component);
+        expect(component.indication.score).toBe(1);
     });
 
     it('should can pass to the next music', () => {
@@ -90,5 +90,24 @@ describe('GameContainerComponent', () => {
         expect(tmpPosition.top !== component.randomPosition.top).toBeTruthy();
         expect(tmpPosition.left !== component.randomPosition.left).toBeTruthy();
     });
+
+    function simulateWin(component){
+        component.ngOnInit();
+        component.randomPosition = {
+            'top': '0px',
+            'left' : '0px'
+        };
+        fixture.detectChanges();
+        const container = <HTMLElement> document.querySelector('.game-container');
+        var ev = new MouseEvent('click', {
+            'view': window,
+            'bubbles': true,
+            'cancelable': true,
+            'screenX': 1,
+            'screenY': 1
+        });
+        container.dispatchEvent(ev);
+        fixture.detectChanges();
+    }
 
 });
