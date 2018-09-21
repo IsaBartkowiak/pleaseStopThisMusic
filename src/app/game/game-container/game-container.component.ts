@@ -69,9 +69,9 @@ export class GameContainerComponent implements OnInit, OnDestroy {
         const answer = document.getElementById('answer');
         if (
             clickX >= answer.offsetLeft &&
-            clickX <= (answer.offsetLeft + answer.offsetWidth - 50) &&
+            clickX <= (answer.offsetLeft + answer.offsetWidth - 30) &&
             clickY >= answer.offsetTop &&
-            clickY <= (answer.offsetTop + answer.offsetHeight - 50)) {
+            clickY <= (answer.offsetTop + answer.offsetHeight - 30)) {
             return 0;
     }
     return Math.floor(Math.sqrt(Math.pow(
