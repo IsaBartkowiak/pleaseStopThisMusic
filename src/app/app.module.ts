@@ -5,14 +5,14 @@ import { GameModule } from './game/game.module';
 
 
 @NgModule({
-  declarations: [
+    declarations: [
     AppComponent
-  ],
-  imports: [
+    ],
+    imports: [
     BrowserModule,
     GameModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
