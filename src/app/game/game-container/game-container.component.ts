@@ -15,13 +15,13 @@ export class GameContainerComponent implements OnInit, OnDestroy {
     private _timerSubscription: Subscription;
     clickContainer: Subject<any> = new Subject();
     win: Subject<any> = new Subject();
-    finded = false;
-    end = false;
-    clickX: number;
-    clickY: number;
-    showCircle = false;
+    circlePosition: any;
     randomPosition: any;
-    time;
+    time: string;
+    finded;
+    endOfGame;
+    showCircle;
+
 
     constructor (private musicService: MusicService, private timerService: TimerService) {}
 
@@ -57,19 +57,27 @@ export class GameContainerComponent implements OnInit, OnDestroy {
         this.musicService.nextMusic();
     }
 
-    checkResult(event) {
-        this.clickX = event.clientX;
-        this.clickY = event.clientY;
+    updateCircle(event){
+        this.circlePosition = {
+            'left': event.clientX - 5+'px',
+            'top': event.clientY - 5+'px',
+        }
         this.showCircle = true;
         const that = this;
         setTimeout(function() {
             that.showCircle = false;
         }, 500);
+    }
+
+    checkResult(event) {
         const distance = this.calculateDistance(event.clientX, event.clientY);
         this.notifyTry(distance);
         if (distance === 0) {
             this.finded = true;
             this.notifyWin(true);
+        }
+        if(this.indication.score === this.indication.totalMusic){
+            this.endOfGame = true;
         }
     }
 

@@ -1,28 +1,33 @@
-<div class="game-container" (click)="checkResult($event)">
+<div class="game-container" (click)="updateCircle($event); checkResult($event)">
+    <!-- Click circles -->
+    <div class="game-click" *ngIf="showCircle" [ngStyle]="circlePosition"></div>
+
+    <!-- Logo -->
     <img class="game-logo" src="assets/images/logo.png" alt="">
+
+    <!-- Target -->
     <div class="game-answer" id="answer" [ngStyle]="randomPosition" [ngClass]="{'win': finded}">
         <img class="game-answer-image" src="assets/images/twerk.gif" alt="">
     </div>
 
-    <div class="game-click" *ngIf="showCircle" [ngStyle]="{'left': clickX - 5+'px', 'top': clickY - 5+'px'}"></div>
+    <!-- Next music button -->
+    <a class="game-next" *ngIf="finded && !endOfGame" (click)="nextMusic($event)">
+        Next music
+    </a>
 
-    <a class="game-next"
-    *ngIf="finded && (indication.score < indication.totalMusic)"
-    (click)="nextMusic($event)">
-    Next music</a>
-
-    <pstm-music-player [clickContainer]="clickContainer" [win]="win"></pstm-music-player>
-    <pstm-game-indication [clickContainer]="clickContainer" [win]="win"></pstm-game-indication>
-
+    <!-- Game timer -->
     <div class="game-timer">
         {{time}}
     </div>
 
-    <div class="game-end" *ngIf="indication.score === indication.totalMusic">
+    <!-- End of game message -->
+    <div class="game-end" *ngIf="endOfGame">
         <h2 class="game-end-text">Thank you for stopping all these music in {{time}}s</h2>
         <p>Maybe you want to</p>
         <div class="game-end-btn" (click)="restartGame($event)">restart</div>
     </div>
 
+    <pstm-music-player [clickContainer]="clickContainer" [win]="win"></pstm-music-player>
+    <pstm-game-indication [clickContainer]="clickContainer" [win]="win"></pstm-game-indication>
 </div>
 

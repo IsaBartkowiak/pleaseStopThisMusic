@@ -34,8 +34,7 @@ describe('GameContainerComponent', () => {
         expect(typeof component.randomPosition === 'object').toBeTruthy('randomPosition is set');
         expect(component.win instanceof Subject).toBeTruthy('win is set');
         expect(component.clickContainer instanceof Subject).toBeTruthy('try is set');
-        expect(component.clickX).toBeFalsy('clickX is set');
-        expect(component.clickX).toBeFalsy('clickY is set');
+        expect(component.circlePosition).toBeFalsy('circlePosition is set');
         expect(component.showCircle).toBeFalsy('showCircle is set');
     });
 
