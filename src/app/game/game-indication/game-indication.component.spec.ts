@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { IndicationPipe } from './indication.pipe';
 import { GameIndicationComponent } from './game-indication.component';
 import { Subject, Subscription} from 'rxjs';
@@ -45,6 +46,13 @@ describe('GameIndicationComponent', () => {
     it('should have music set', () => {
         component.ngOnInit();
         expect(component.music.name).toEqual(MUSICS[0].name);
+    });
+
+    it('should show and hide indications messages', () => {
+        component.ngOnInit();
+        expect(fixture.debugElement.query(By.css('.game-indication-message'))).toBeTruthy();
+        waits(3000);
+        expect(fixture.debugElement.query(By.css('.game-indication-message'))).toBeFalsy();
     });
 
 });

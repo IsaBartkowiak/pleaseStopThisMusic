@@ -8,7 +8,7 @@ describe('IndicationPipe', () => {
 
     it('should return start text if null value is passed', () => {
         const pipe = new IndicationPipe();
-        expect(pipe.transform(null)).toBeFalsy();
+        expect(pipe.transform(null)).toBe('Click to stop this music');
     });
 
     it('should return BURNING if distance is < 30', () => {
