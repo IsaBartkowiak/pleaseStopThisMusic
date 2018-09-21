@@ -14,7 +14,7 @@ export class GameIndicationComponent implements OnInit, OnDestroy {
     distance;
     showIndicator;
     showMessage;
-    score : number = 0;
+    score = 0;
     totalMusic: number;
     music: any;
     counter;
@@ -41,7 +41,7 @@ export class GameIndicationComponent implements OnInit, OnDestroy {
         this._subscription.add(sub3);
         this.totalMusic = this.musicService.getTotalCount();
         this.showMessage = true;
-        setTimeout(()=>{
+        setTimeout(() => {
             this.showMessage = false;
         }, 4000);
     }

@@ -39,17 +39,15 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
         this.subscription.add(sub3);
     }
 
-    infinitePlay(file){
-        this.audio = new Audio('assets/audio/'+file);
+    infinitePlay(file) {
+        this.audio = new Audio('assets/audio/' + file);
         this.playAudio();
-        var that = this;
-        this.audio.addEventListener('ended', function() {
-            this.currentTime = 0;
-            that.playAudio();
+        this.audio.addEventListener('ended', () => {
+            this.playAudio();
         }, false);
     }
 
-    playAudio(){
+    playAudio() {
         this.audio.load();
         this.audio.play();
         this.audio.volume = 0.4;

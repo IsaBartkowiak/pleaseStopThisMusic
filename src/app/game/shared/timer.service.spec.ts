@@ -19,7 +19,7 @@ describe('TimerService', () => {
 
     it('should return good number of minutes/seconds', fakeAsync(() => {
         const service: TimerService = TestBed.get(TimerService);
-        let currentTime = undefined;
+        let currentTime;
         const sub = service.getTimer().subscribe(x => {
             currentTime = x;
         });

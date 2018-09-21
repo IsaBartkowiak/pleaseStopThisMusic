@@ -8,17 +8,17 @@ import { GameIndicationComponent } from './game-indication/game-indication.compo
 import { IndicationPipe } from './game-indication/indication.pipe';
 
 @NgModule({
-  imports: [
+    imports: [
     CommonModule,
-  ],
-  declarations: [
-  	GameContainerComponent,
-  	MusicPlayerComponent,
-  	GameIndicationComponent,
-  	IndicationPipe
-  ],
-  providers: [MusicService, TimerService],
-  exports: [GameContainerComponent]
+    ],
+    declarations: [
+    GameContainerComponent,
+    MusicPlayerComponent,
+    GameIndicationComponent,
+    IndicationPipe
+    ],
+    providers: [MusicService, TimerService],
+    exports: [GameContainerComponent]
 })
 
 export class GameModule { }

@@ -16,8 +16,8 @@ describe('MusicPlayerComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(MusicPlayerComponent);
         component = fixture.componentInstance;
-        const win : Subject<any> = new Subject();
-        const essay : Subject<any> = new Subject();
+        const win: Subject<any> = new Subject();
+        const essay: Subject<any> = new Subject();
         component.clickContainer = essay;
         component.win = win;
         fixture.detectChanges();

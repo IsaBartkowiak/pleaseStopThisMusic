@@ -38,14 +38,14 @@ export class GameContainerComponent implements OnInit, OnDestroy {
         };
     }
 
-    listenTimer(){
+    listenTimer() {
         this._timerSubscription = this.timerService.getTimer().subscribe(
             time => {
                 this.time = time;
             });
     }
 
-    restartTimer(){
+    restartTimer() {
         this._timerSubscription.unsubscribe();
         this.listenTimer();
     }
@@ -57,11 +57,11 @@ export class GameContainerComponent implements OnInit, OnDestroy {
         this.musicService.nextMusic();
     }
 
-    updateCircle(event){
+    updateCircle(event) {
         this.circlePosition = {
-            'left': event.clientX - 5+'px',
-            'top': event.clientY - 5+'px',
-        }
+            'left': event.clientX - 5 + 'px',
+            'top': event.clientY - 5 + 'px',
+        };
         this.showCircle = true;
         const that = this;
         setTimeout(function() {
@@ -76,13 +76,13 @@ export class GameContainerComponent implements OnInit, OnDestroy {
             this.finded = true;
             this.notifyWin(true);
         }
-        if(this.indication.score === this.indication.totalMusic){
+        if (this.indication.score === this.indication.totalMusic) {
             this.endOfGame = true;
             this._timerSubscription.unsubscribe();
         }
     }
 
-    restartGame(){
+    restartGame() {
         event.stopPropagation();
         this.indication.score = 0;
         this.finded = false;

@@ -92,15 +92,15 @@ describe('GameContainerComponent', () => {
         expect(tmpPosition.left !== component.randomPosition.left).toBeTruthy();
     });
 
-    function simulateWin(component){
-        component.ngOnInit();
-        component.randomPosition = {
+    function simulateWin(comp) {
+        comp.ngOnInit();
+        comp.randomPosition = {
             'top': '0px',
             'left' : '0px'
         };
         fixture.detectChanges();
         const container = <HTMLElement> document.querySelector('.game-container');
-        var ev = new MouseEvent('click', {
+        const ev = new MouseEvent('click', {
             'view': window,
             'bubbles': true,
             'cancelable': true,

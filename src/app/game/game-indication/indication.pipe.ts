@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class IndicationPipe implements PipeTransform {
 
     transform (distance: number, format: string = 'human'): any {
-        if(format != 'human' && format != 'class'){
+        if (format !== 'human' && format !== 'class') {
             return;
         }
         if (!distance) {
