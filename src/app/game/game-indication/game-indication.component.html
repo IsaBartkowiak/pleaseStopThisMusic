@@ -11,7 +11,8 @@
     <div class="game-indication-music">
         {{music.name}}
     </div>
-    <div class="game-indication-message">
+    <div class="game-indication-message" *ngIf="showMessage">
         <p>Something is hidden on the page. Click somewhere on the page to find it and stop this music</p>
     </div>
 </div>
+{{showMessage | json}}

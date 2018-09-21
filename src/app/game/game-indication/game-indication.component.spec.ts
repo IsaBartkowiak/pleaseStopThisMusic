@@ -51,8 +51,6 @@ describe('GameIndicationComponent', () => {
     it('should show and hide indications messages', () => {
         component.ngOnInit();
         expect(fixture.debugElement.query(By.css('.game-indication-message'))).toBeTruthy();
-        waits(3000);
-        expect(fixture.debugElement.query(By.css('.game-indication-message'))).toBeFalsy();
     });
 
 });

@@ -3,9 +3,9 @@ import { Subject, Subscription} from 'rxjs';
 import { MusicService } from './../shared/music.service';
 
 @Component({
-  selector: 'pstm-game-indication',
-  templateUrl: './game-indication.component.html',
-  styleUrls: ['./game-indication.component.scss']
+    selector: 'pstm-game-indication',
+    templateUrl: './game-indication.component.html',
+    styleUrls: ['./game-indication.component.scss']
 })
 export class GameIndicationComponent implements OnInit, OnDestroy {
     @Input() clickContainer: Subject<any>;
@@ -13,6 +13,7 @@ export class GameIndicationComponent implements OnInit, OnDestroy {
     subscription: Subscription = new Subscription();
     distance;
     showIndicator;
+    showMessage;
     score : number = 0;
     totalMusic: number;
     music: any;
@@ -38,6 +39,10 @@ export class GameIndicationComponent implements OnInit, OnDestroy {
         });
         this.subscription.add(sub3);
         this.totalMusic = this.musicService.getTotalCount();
+        this.showMessage = true;
+        setTimeout(()=>{
+            this.showMessage = false;
+        }, 4000);
     }
 
     ngOnDestroy() {
