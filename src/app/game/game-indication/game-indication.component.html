@@ -1,3 +1,14 @@
-<p>
-  game-indication works!
-</p>
+<div class="game-indication">
+    <div class="game-indication-text"
+    [ngClass]="[distance | indication: 'class' : showIndicator]"
+    [ngSwitch]="showIndicator">
+        <span *ngSwitchCase="true">{{distance | indication}}</span>
+        <span *ngSwitchCase="false">Yeaaah ! </span>
+    </div>
+    <div class="game-indication-score">
+        {{score}} / {{totalMusic}}
+    </div>
+    <div class="game-indication-music">
+        {{music.name}}
+    </div>
+</div>
