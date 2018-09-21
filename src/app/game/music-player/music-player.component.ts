@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, Input, OnDestroy} from '@angular/core';
 import { Subject, Subscription} from 'rxjs';
 import { MusicService } from './../shared/music.service';
 
@@ -7,8 +7,8 @@ import { MusicService } from './../shared/music.service';
     templateUrl: './music-player.component.html',
     styleUrls: ['./music-player.component.scss']
 })
-export class MusicPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
-    @Input() try: Subject<any>;
+export class MusicPlayerComponent implements OnInit, OnDestroy {
+    @Input() clickContainer: Subject<any>;
     @Input() win: Subject<any>;
     music: any;
     audio: any;
@@ -17,7 +17,7 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(private musicService: MusicService) { }
 
     ngOnInit() {
-        const sub1 = this.try.subscribe(distance => {
+        const sub1 = this.clickContainer.subscribe(distance => {
             if (this.audio) {
                 this.audio.volume = this.getRelativeVolumetoDistance(distance);
             }
@@ -33,19 +33,14 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
         const sub3 = this.musicService.getCurrentMusic().subscribe(music => {
             if (this.audio) {
                 this.audio.pause();
-                this.audio.load();
-                const that = this;
-                setTimeout(function() { that.audio.play(); }, 0);
             }
+            this.audio = new Audio('assets/audio/'+music.file);
+            this.audio.load();
+            this.audio.play();
+            this.audio.volume = 0.4;
             this.music = music;
         });
         this.subscription.add(sub3);
-    }
-
-    ngAfterViewInit() {
-        this.audio = document.getElementById('music-player');
-        this.audio.play();
-        this.audio.volume = 0.4;
     }
 
     getRelativeVolumetoDistance(distance) {
