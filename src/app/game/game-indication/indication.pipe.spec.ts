@@ -6,7 +6,7 @@ describe('IndicationPipe', () => {
         expect(pipe).toBeTruthy();
     });
 
-    it('should return false if null value is passed', () => {
+    it('should return start text if null value is passed', () => {
         const pipe = new IndicationPipe();
         expect(pipe.transform(null)).toBeFalsy();
     });

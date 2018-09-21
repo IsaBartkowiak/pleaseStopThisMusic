@@ -6,11 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class IndicationPipe implements PipeTransform {
 
   transform (distance: number, format: string = 'human'): any {
-    if  (format !== 'human' && format !== 'class') {
-        return;
-    }
     if (!distance) {
-        return 'Try to click';
+        return 'Click to stop this music';
     }
     if (distance < 80) {
         return format === 'human' ? 'Burning' : 'burning';
