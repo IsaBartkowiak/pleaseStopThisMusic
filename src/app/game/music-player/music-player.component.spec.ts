@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, Subject} from 'rxjs';
 import { MusicPlayerComponent } from './music-player.component';
+import { MusicService } from '../shared/music.service';
 
 describe('MusicPlayerComponent', () => {
     let component: MusicPlayerComponent;
@@ -8,7 +9,8 @@ describe('MusicPlayerComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ MusicPlayerComponent ]
+            declarations: [ MusicPlayerComponent ],
+            providers: [MusicService]
         })
         .compileComponents();
     }));
@@ -29,6 +31,8 @@ describe('MusicPlayerComponent', () => {
 
     it('should have an audio file setted', () => {
         component.ngOnInit();
+        const musicService = TestBed.get(MusicService);
+        musicService.setMusics();
         fixture.detectChanges();
         expect(component.music.file).toBeTruthy();
     });

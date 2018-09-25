@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { MusicService } from './music.service';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 export const TESTMUSICS: any[] = [
 {
@@ -30,6 +30,7 @@ describe('MusicService', () => {
 
     it('should have getMusics() working function', () => {
         const service = TestBed.get(MusicService);
+        service.setMusics();
         service.getMusics().subscribe((music) => {
             expect(music.length).toBe(2);
             expect(music[0].name).toEqual('test1');
@@ -38,7 +39,8 @@ describe('MusicService', () => {
     });
     it('should have getCurrentMusic() working function', () => {
         const service = TestBed.get(MusicService);
-        expect(service.getCurrentMusic() instanceof BehaviorSubject).toBeTruthy();
+        service.setMusics();
+        expect(service.getCurrentMusic() instanceof Subject).toBeTruthy();
         service.getCurrentMusic().subscribe((music) => {
             expect(music.name).toEqual('test1');
             expect(music.file).toEqual('test');

@@ -16,27 +16,29 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     constructor(private musicService: MusicService) { }
 
     ngOnInit() {
-        const sub1 = this.clickContainer.subscribe(distance => {
+        const distanceEvent = this.clickContainer.subscribe(distance => {
             if (this.audio) {
                 this.audio.volume = this.getRelativeVolumetoDistance(distance);
             }
         });
-        this.subscription.add(sub1);
-        const sub2 = this.win.subscribe(status => {
+        this.subscription.add(distanceEvent);
+        const findedEvent = this.win.subscribe(status => {
             if (status) {
-                this.audio.volume = 0.1;
+                this.audio.volume = 0;
             }
         });
-        this.subscription.add(sub2);
+        this.subscription.add(findedEvent);
 
-        const sub3 = this.musicService.getCurrentMusic().subscribe(music => {
-            if (this.audio) {
-                this.audio.pause();
+        const musicEvent = this.musicService.getCurrentMusic().subscribe(music => {
+            if (music) {
+                if (this.audio) {
+                    this.audio.pause();
+                }
+                this.music = music;
+                this.infinitePlay(music.file);
             }
-            this.music = music;
-            this.infinitePlay(music.file);
         });
-        this.subscription.add(sub3);
+        this.subscription.add(musicEvent);
     }
 
     infinitePlay(file) {
