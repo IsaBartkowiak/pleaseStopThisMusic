@@ -84,7 +84,7 @@ describe('GameContainerComponent', () => {
         const tmpPosition = component.randomPosition;
         component.finded = true;
         fixture.detectChanges();
-        const nextBtn = <HTMLElement> document.querySelector('.game-next');
+        const nextBtn = <HTMLElement> document.querySelector('.game-next-btn');
         expect(nextBtn).toBeTruthy();
         nextBtn.click();
         fixture.detectChanges();

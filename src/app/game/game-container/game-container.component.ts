@@ -17,6 +17,7 @@ export class GameContainerComponent implements OnInit, OnDestroy {
     win: Subject<any> = new Subject();
     circlePosition: any;
     randomPosition: any;
+    fullHeight: any;
     time: string;
     finded;
     endOfGame;
@@ -26,6 +27,7 @@ export class GameContainerComponent implements OnInit, OnDestroy {
     constructor (private musicService: MusicService, private timerService: TimerService) {}
 
     ngOnInit() {
+        this.fullHeight = {'height': window.innerHeight + 'px'};
         this.setRandomPosition();
         this.listenTimer();
     }
@@ -88,7 +90,7 @@ export class GameContainerComponent implements OnInit, OnDestroy {
         this.finded = false;
         this.endOfGame = false;
         this.setRandomPosition();
-        this.musicService.resetMusics();
+        this.musicService.setMusics();
         this.restartTimer();
     }
 
@@ -116,7 +118,6 @@ notifyWin(status) {
 }
 
 ngOnDestroy() {
-    this.musicService.getCurrentMusic().unsubscribe();
     this._timerSubscription.unsubscribe();
 }
 
