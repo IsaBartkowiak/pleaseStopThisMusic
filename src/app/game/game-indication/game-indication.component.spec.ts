@@ -4,6 +4,7 @@ import { IndicationPipe } from './indication.pipe';
 import { GameIndicationComponent } from './game-indication.component';
 import { Subject, Subscription} from 'rxjs';
 import { MUSICS } from '../shared/mock-musics';
+import { MusicService } from '../shared/music.service';
 
 describe('GameIndicationComponent', () => {
     let component: GameIndicationComponent;
@@ -11,7 +12,8 @@ describe('GameIndicationComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ GameIndicationComponent, IndicationPipe ]
+            declarations: [ GameIndicationComponent, IndicationPipe ],
+            providers: [MusicService]
         })
         .compileComponents();
     }));
@@ -22,6 +24,8 @@ describe('GameIndicationComponent', () => {
         component.clickContainer = new Subject();
         component.clickContainer.next(160);
         component.win = new Subject();
+        const musicService = TestBed.get(MusicService);
+        musicService.setMusics();
         fixture.detectChanges();
     });
 
@@ -34,7 +38,6 @@ describe('GameIndicationComponent', () => {
         expect(component.clickContainer instanceof Subject).toBeTruthy('try is set');
         expect(component.distance).toBeFalsy('distance is set');
         expect(component.score).toEqual(0, 'Score is set');
-        expect(component.music).toBeTruthy();
     });
 
     it('should have totalMusics works', () => {
@@ -44,6 +47,9 @@ describe('GameIndicationComponent', () => {
 
     it('should have music set', () => {
         component.ngOnInit();
+        const musicService = TestBed.get(MusicService);
+        musicService.setMusics();
+        fixture.detectChanges();
         expect(component.music.name).toEqual(MUSICS[0].name);
     });
 

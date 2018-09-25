@@ -41,9 +41,11 @@ export class GameIndicationComponent implements OnInit, OnDestroy {
         this._subscription.add(sub3);
         this.totalMusic = this.musicService.getTotalCount();
         this.showMessage = true;
-        setTimeout(() => {
-            this.showMessage = false;
-        }, 4000);
+    }
+
+    startGame() {
+        this.musicService.setMusics();
+        this.showMessage = false;
     }
 
     ngOnDestroy() {

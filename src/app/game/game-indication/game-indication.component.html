@@ -1,11 +1,7 @@
-<div class="game-indication">
-    <div class="game-indication-text"
-    [ngClass]="[distance | indication: 'class' : showIndicator]"
-    [ngSwitch]="showIndicator">
-        <span *ngSwitchCase="true">
+<!-- Infos -->
+<div class="game-indication" *ngIf="music">
+    <div class="game-indication-text" [ngClass]="distance | indication: 'class'" *ngIf="showIndicator">
         {{distance | indication}}
-        </span>
-        <span *ngSwitchCase="false">Yeaaah ! </span>
     </div>
     <div class="game-indication-score">
         {{score}} / {{totalMusic}}
@@ -13,7 +9,9 @@
     <div class="game-indication-music">
         <i class="icon-headphones"></i>{{music.name}}
     </div>
-    <div class="game-indication-message" *ngIf="showMessage" (click)="showMessage = !showMessage">
-        <p>Something is hidden on the page. Click somewhere on the page to find it and stop this music</p>
-    </div>
+</div>
+<!-- Instructions -->
+<div class="game-indication-message" *ngIf="showMessage">
+    <p>Something is hidden on the page. Click somewhere to stop all the great music that will be played.</p>
+    <a class="game-indication-message-btn" (click)="startGame()">Start game</a>
 </div>
