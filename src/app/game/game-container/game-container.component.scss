@@ -1,7 +1,6 @@
 @import './src/assets/styles/_variables';
 .game{
     &-container{
-        height: 100vh;
         position: relative;
     }
     &-answer{
@@ -117,29 +116,50 @@
         right: 10px;
         color:white;
         font-size: 0.6rem;
-            @media (max-width: 768px) {
-        top: 30px;
-    }
+        @media (max-width: 768px) {
+            top: 30px;
+        }
     }
     &-next{
-      position: absolute;
-      bottom: 50px;
-      cursor:pointer;
-      width: 130px;
-      padding: 12px 10px;
-      left: 0;
-      border-radius: 80px;
-      color: white;
-      letter-spacing: 2px;
-      right: 0;
-      margin: 0 auto;
-      background-color: black;
-      text-transform: uppercase;
-      text-align: center;
-      font-weight: 400;
-      font-size: 0.7rem;
-      @media (max-width: 768px) {
-        bottom: 55px;
+     position: absolute;
+     bottom: -23px;
+     z-index: 4;
+     left: 0;
+     right: 0;
+     margin: auto;
+     width: 250px;
+     height: 130px;
+     text-align: center;
+     color: white;
+     &-title{
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+    &-btn{
+        margin-top: 20px;
+        cursor:pointer;
+        width: 130px;
+        padding: 10px 15px;
+        left: 0;
+        line-height:0.65rem;
+        border-radius: 80px;
+        color: black;
+        letter-spacing: 2px;
+        right: 0;
+        margin: 0 auto;
+        opacity: 1;
+        background-color: white;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 400;
+        font-size: 0.65rem;
+        transition: all .2s ease;
+        &:hover{
+            opacity: 0.8;
+        }
+        @media (max-width: 768px) {
+            bottom: 55px;
+        }
     }
 }
 }
